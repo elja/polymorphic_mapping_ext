@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'polymorphic_integer_type/version'
+require 'polymorphic_mapping_ext/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "polymorphic_integer_type"
-  spec.version       = PolymorphicIntegerType::VERSION
-  spec.authors       = ["Kyle d'Oliveira"]
-  spec.email         = ["kyle@goclio.com"]
-  spec.description   = %q{Allows the *_type field in the DB to be an integer rather than a string}
-  spec.summary       = %q{Use integers rather than strings for the _type field}
+  spec.name          = "polymorphic_mapping_ext"
+  spec.version       = PolymorphicMappingExt::VERSION
+  spec.authors       = ["Alex Eliseev"]
+  spec.email         = ["alex@brightstores.com"]
+  spec.description   = %q{Allows to remap polymophic *_type attributes}
+  spec.summary       = %q{Allows to remap polymophic *_type attributes}
   spec.homepage      = ""
   spec.license       = "MIT"
 

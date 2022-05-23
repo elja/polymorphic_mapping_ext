@@ -1,4 +1,4 @@
-module PolymorphicIntegerType
+module PolymorphicMappingExt
   module PolymorphicArrayValueExtension
 
     # original method:
@@ -36,4 +36,4 @@ module PolymorphicIntegerType
   end
 end
 
-ActiveRecord::PredicateBuilder::PolymorphicArrayValue.prepend(PolymorphicIntegerType::PolymorphicArrayValueExtension)
+ActiveRecord::PredicateBuilder::PolymorphicArrayValue.prepend(PolymorphicMappingExt::PolymorphicArrayValueExtension)

@@ -1,22 +1,15 @@
-module PolymorphicIntegerType
+module PolymorphicMappingExt
 
   module Extensions
     module ClassMethods
-
       def belongs_to(name, scope = nil, **options)
         options = scope if scope.kind_of? Hash
-        integer_type = options.delete :integer_type
         super
-        if options[:polymorphic] && (integer_type || options[:polymorphic].is_a?(Hash))
-          mapping =
-            case integer_type
-            when true then PolymorphicIntegerType::Mapping[name]
-            when nil then options[:polymorphic]
-            else
-              raise ArgumentError, "Unknown integer_type value: #{integer_type.inspect}"
-            end.dup
 
+        if options[:polymorphic] && options[:polymorphic].is_a?(Hash)
+          mapping = options[:polymorphic].dup
           foreign_type = reflections[name.to_s].foreign_type
+
           _polymorphic_foreign_types << foreign_type
 
           # Required way to dynamically define a class method on the model
@@ -36,15 +29,15 @@ module PolymorphicIntegerType
       end
 
       def remove_type_and_establish_mapping(name, options, scope)
-        integer_type = options.delete :integer_type
         polymorphic_type_mapping = retrieve_polymorphic_type_mapping(
           polymorphic_type: options[:as],
           class_name: options[:class_name] || name.to_s.classify
         )
 
-        if options[:as] && (polymorphic_type_mapping || integer_type)
+        if options[:as] && polymorphic_type_mapping
           poly_type = options.delete(:as)
-          polymorphic_type_mapping ||= PolymorphicIntegerType::Mapping[poly_type]
+          polymorphic_type_mapping ||= PolymorphicMappingExt::Mapping[poly_type]
+
           if polymorphic_type_mapping.nil?
             raise "Polymorphic type mapping missing for #{poly_type.inspect}"
           end
@@ -99,8 +92,6 @@ module PolymorphicIntegerType
         remove_type_and_establish_mapping(name, options, scope)
         super(name, options.delete(:scope), **options)
       end
-
-
     end
 
     def self.included(base)
@@ -130,7 +121,5 @@ module PolymorphicIntegerType
         super(attr_name, value)
       end
     end
-
   end
-
 end

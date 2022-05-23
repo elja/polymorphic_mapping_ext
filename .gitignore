@@ -4,6 +4,8 @@
 .bundle
 .config
 .yardoc
+.tool-versions
+.idea
 Gemfile.lock
 InstalledFiles
 _yardoc
@@ -18,4 +20,4 @@ test/tmp
 test/version_tmp
 tmp
 .byebug_history
-polymorphic_integer_type_test
+polymorphic_mapping_ext_test

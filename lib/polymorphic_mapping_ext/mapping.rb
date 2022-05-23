@@ -1,5 +1,4 @@
-module PolymorphicIntegerType
-
+module PolymorphicMappingExt
   class Mapping
     @@mapping = {}
 

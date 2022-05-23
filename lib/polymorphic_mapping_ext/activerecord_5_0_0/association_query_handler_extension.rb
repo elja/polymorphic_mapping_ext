@@ -1,4 +1,4 @@
-module PolymorphicIntegerType
+module PolymorphicMappingExt
   module AssociationQueryHandlerExtension
     def call(attribute, value)
       queries = {}
@@ -30,9 +30,7 @@ module PolymorphicIntegerType
         query_value.base_class.name
       end
     end
-
-
   end
 end
 
-ActiveRecord::PredicateBuilder::AssociationQueryHandler.prepend(PolymorphicIntegerType::AssociationQueryHandlerExtension)
+ActiveRecord::PredicateBuilder::AssociationQueryHandler.prepend(PolymorphicMappingExt::AssociationQueryHandlerExtension)
